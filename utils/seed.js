@@ -7,7 +7,7 @@ const generateUniqueRandomBook = require('./generateRandomBook');
 
 async function seedData() {
   try {
-    await mongoose.connect('mongodb+srv://ashish-mern:ashish123@cluster0.s343uje.mongodb.net/LibraryDatabase?retryWrites=true&w=majority&appName=Cluster0');
+    await mongoose.connect('process.env.MONGO_URI');
 
     await Author.deleteMany();
     await Book.deleteMany();
