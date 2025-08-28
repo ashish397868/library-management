@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#0d1117] text-white">
+<head>
+  <meta charset="UTF-8" />
+  <title>Return Book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/final.css" />
+</head>
+<body class="bg-[#0d1117] text-white">
+  <%- include('partials/navbar', { user: user }) %>
+
+  <main class="flex flex-col items-center justify-center min-h-screen px-4 py-10">
+    <div class="w-full max-w-3xl bg-white/10 p-8 rounded-xl shadow-lg">
+      <h1 class="text-3xl md:text-4xl text-cyan-400 font-bold mb-6 text-center">Return Book</h1>
+
+      <form action="/borrow/return" method="POST" class="space-y-6">
+        <input type="hidden" name="borrowId" value="<%= book._id %>" />
+      
+
+        <!-- Book Details -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block mb-2 text-sm font-semibold">Book Title</label>
+            <input type="text" readonly value="<%= book.bookId.title %>" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" />
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-semibold">Genre</label>
+            <input type="text" readonly value="<%= book.bookId.genre %>" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" />
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-semibold">Publication Year</label>
+            <input type="text" readonly value="<%= book.bookId.publication_year %>" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" />
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-semibold">Author</label>
+            <input type="text" readonly value="<%= book.bookId.authorId?.name || 'N/A' %>" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" />
+          </div>
+        </div>
+
+        <!-- User Select Dropdown -->
+        <div>
+          <label for="userId" class="block mb-2 text-sm font-semibold">Select User</label>
+          <select name="userId" id="userId" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" required>
+            <% users.forEach(function(user) { %>
+              <option value="<%= user._id %>" <%= user._id.equals(book.userId) ? 'selected' : '' %> >
+                <%= user.userid %>
+              </option>
+            <% }); %>
+          </select>
+        </div>
+
+        <!-- Return Button -->
+        <div class="text-center">
+          <button type="submit" class="mt-4 px-6 py-2 bg-cyan-400 text-[#0d1117] font-semibold rounded-md hover:bg-cyan-300 transition">
+            Confirm Return
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

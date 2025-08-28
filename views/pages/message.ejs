@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Message</title>
+    </head>
+    <body class="bg-[#0d1117] text-white">
+      <%- include('partials/navbar', { user: user || null }) %>
+  
+      <main class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div
+          class="bg-white/10 backdrop-blur-md border border-cyan-400/30 max-w-xl w-full p-6 rounded-xl shadow-lg text-center flex flex-col gap-6 transition-all duration-300 hover:shadow-cyan-400/50"
+        >
+          <p class="text-xl text-cyan-400 font-semibold"><%= message %></p>
+  
+          <a href="/" class="inline-block">
+            <button
+              type="button"
+              class="mt-2 w-full border-2 border-cyan-400 text-cyan-400 font-bold py-2 px-4 rounded-md hover:bg-cyan-400 hover:text-[#0d1117] transition"
+            >
+              Home Page
+            </button>
+          </a>
+        </div>
+      </main>
+  
+      <script src="https://cdn.tailwindcss.com"></script>
+    </body>
+  </html>

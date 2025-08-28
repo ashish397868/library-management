@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#0d1117] text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/final.css" />
+  </head>
+  <body class="bg-[#0d1117] text-white">
+    <%- include('partials/navbar', { user: user }) %>
+
+    <main class="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+      <div class="w-full max-w-6xl bg-white/10 p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl md:text-4xl text-cyan-400 font-bold mb-6 text-center">Books Available</h1>
+        
+        <!-- Overflow wrapper ensures horizontal scrolling on mobile -->
+        <div class="overflow-x-auto rounded-lg">
+          <table class="min-w-full divide-y divide-gray-600 table-auto border border-gray-700 shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-gray-800 text-cyan-400">
+              <tr>
+                <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Book Name</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Genre</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Year</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Author</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Quantity</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Action</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-600">
+              <% if (books.length === 0) { %>
+                <tr>
+                  <td colspan="5" class="px-6 py-4 text-center text-gray-300">No books available</td>
+                </tr>
+              <% } %>
+
+              <% books.forEach(function(book) { %>
+                <tr class="hover:bg-white/5 transition duration-200">
+                  <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.title %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.genre %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.publication_year %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.authorId.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.quantity %></td>
+                  <td class="px-6 py-4 whitespace-nowrap flex flex-col md:flex-row items-center gap-2">
+                    <!-- Borrow Button -->
+                    <a href="/borrow/books/<%= book._id %>">
+                      <button class="px-4 py-2 text-sm font-bold text-[#0d1117] bg-cyan-400 rounded-md hover:bg-cyan-300 transition shadow-md">
+                        Borrow Book
+                      </button>
+                    </a>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

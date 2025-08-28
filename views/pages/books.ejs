@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d0d0d;
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px #00ffcc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #00ffcc;
+            transition: all 0.3s ease-in-out;
+        }
+
+        th {
+            background-color: #00ffcc;
+            color: #0d0d0d;
+            text-transform: uppercase;
+        }
+
+        td {
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 255, 204, 0.2);
+            transform: scale(1.02);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(45deg, #00ffcc, #0066ff);
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 15px #00ffcc;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #00ffcc;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Library Book Collection</h1>
+
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Publication Year</th>
+            <th>Author Name</th>
+            <th>Nationality</th>
+        </tr>
+        
+        <% books.forEach(function(book) { %>
+            <tr>
+                <td><%= book.title %></td>
+                <td><%= book.genre %></td>
+                <td><%= book.publication_year %></td>
+                <td><%= book.authorId ? book.authorId.name : 'Unknown' %></td>
+                <td><%= book.authorId ? book.authorId.nationality : 'Unknown' %></td>
+            </tr>
+        <% }); %>
+
+    </table>
+
+    <a href="/bookshome">
+        <button>Back</button>
+    </a>
+    
+</body>
+</html>

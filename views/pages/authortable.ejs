@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#0d1117] text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Author List</title>
+    <link rel="stylesheet" href="/css/final.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-[#0d1117] text-white">
+    <!-- Navbar -->
+    <%- include('partials/navbar', { user: user }) %>
+
+    <main class="flex flex-col items-center justify-start min-h-screen px-4 py-10">
+      <div class="w-full max-w-6xl bg-white/10 backdrop-blur-md border border-cyan-400/30 p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-cyan-400/40 transition-all duration-300">
+        <h1 class="text-3xl md:text-4xl text-cyan-400 font-bold mb-6 text-center">Authors Available</h1>
+
+        <div class="overflow-x-auto rounded-xl">
+          <table class="min-w-full divide-y divide-gray-700 border border-cyan-400/20 text-sm md:text-base shadow-inner">
+            <thead class="bg-[#161b22] text-cyan-400">
+              <tr>
+                <th class="px-4 py-3 text-left font-bold uppercase">Author ID</th>
+                <th class="px-4 py-3 text-left font-bold uppercase">Name</th>
+                <th class="px-4 py-3 text-left font-bold uppercase">Nationality</th>
+                <th class="px-4 py-3 text-left font-bold uppercase">Bio</th>
+                <th class="px-4 py-3 text-left font-bold uppercase">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-700">
+              <% if (authors.length === 0) { %>
+                <tr>
+                  <td colspan="5" class="text-center px-4 py-4 text-gray-300">No Authors available</td>
+                </tr>
+              <% } %>
+
+              <% authors.forEach(function(author) { %>
+                <tr class="hover:bg-white/5 transition duration-200">
+                  <td class="px-4 py-4 text-white"><%= author.authorId %></td>
+                  <td class="px-4 py-4 text-white"><%= author.name %></td>
+                  <td class="px-4 py-4 text-white"><%= author.nationality %></td>
+                  <td class="px-4 py-4 text-white break-words max-w-xs"><%= author.bio %></td>
+                  <td class="px-4 py-4">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                      <a href="/authors/<%= author._id %>">
+                        <button class="w-full sm:w-auto px-4 py-2 font-bold text-[#0d1117] bg-cyan-400 rounded-md hover:bg-[#00d4ff] hover:shadow-[0_0_10px_rgba(0,255,255,0.8)] transition">Edit</button>
+                      </a>
+                      <form action="/authors/<%= author._id %>?_method=DELETE" method="POST" class="w-full sm:w-auto">
+                        <button type="submit" class="w-full px-4 py-2 font-bold text-white bg-red-600 rounded-md hover:bg-red-500 hover:shadow-md transition">Delete</button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-6 flex justify-center">
+          <a href="/authors" class="w-full sm:w-auto">
+            <button class="w-full px-6 py-2 font-bold border-2 border-cyan-400 text-cyan-400 rounded-md hover:bg-cyan-400 hover:text-[#0d1117] transition">Add New Author</button>
+          </a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
