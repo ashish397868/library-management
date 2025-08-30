@@ -22,7 +22,7 @@ module.exports.getAvailableBooks = async (req, res) => {
 
 module.exports.getBorrowBookById = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id).populate("authorId");
+    const book = await Book.findById(req.params.id);
     const users = await User.find();
 
     res.render("pages/borrowBook", { book, users });
@@ -36,13 +36,7 @@ module.exports.getBorrowedBooks = async (req, res) => {
   try {
     const borrowedBooks = await Borrow.find()
       .populate("bookId")
-      .populate("userId")
-      .populate({
-        path: "bookId",
-        populate: {
-          path: "authorId",
-        },
-      });
+      .populate("userId");
 
     res.render("pages/borrowedbooktable", { books: borrowedBooks });
   } catch (error) {
@@ -89,13 +83,7 @@ module.exports.getReturnBook = async (req, res) => {
   try {
     const borrowedBook = await Borrow.findById(req.params.id)
       .populate("bookId")
-      .populate("userId")
-      .populate({
-        path: "bookId",
-        populate: {
-          path: "authorId",
-        },
-      });
+      .populate("userId");
 
     const users = await User.find();
 

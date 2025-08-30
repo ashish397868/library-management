@@ -22,7 +22,9 @@
                 <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Genre</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Year</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Author</th>
+                <% if (user.role === 'admin') { %>
                 <th class="px-6 py-3 text-left text-sm font-semibold tracking-wider uppercase">Action</th>
+                <% } %>
               </tr>
             </thead>
 
@@ -40,18 +42,26 @@
                   <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.publication_year %></td>
                   <td class="px-6 py-4 whitespace-nowrap text-gray-100"><%= book.author %></td>
                   <td class="px-6 py-4 whitespace-nowrap flex flex-col md:flex-row items-center gap-2">
-                    <!-- Edit Button -->
-                    <a href="/books/<%= book._id %>">
-                      <button class="px-4 py-2 text-sm font-bold text-[#0d1117] bg-cyan-400 rounded-md hover:bg-cyan-300 transition shadow-md">
-                        Edit
-                      </button>
-                    </a>
-                    <!-- Delete Button -->
-                    <form action="/books/<%= book._id %>?_method=DELETE" method="POST">
-                      <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-red-600 rounded-md hover:bg-red-500 transition shadow-md">
-                        Delete
-                      </button>
-                    </form>
+                    <% if (user.role === 'admin') { %>
+                      <!-- Edit Button -->
+                      <a href="/books/<%= book._id %>">
+                        <button class="px-4 py-2 text-sm font-bold text-[#0d1117] bg-cyan-400 rounded-md hover:bg-cyan-300 transition shadow-md">
+                          Edit
+                        </button>
+                      </a>
+                      <!-- Delete Button -->
+                      <form action="/books/<%= book._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-red-600 rounded-md hover:bg-red-500 transition shadow-md">
+                          Delete
+                        </button>
+                      </form>
+                      <!-- Return Book Button -->
+                      <form action="/books/<%= book._id %>/return" method="POST">
+                        <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-green-600 rounded-md hover:bg-green-500 transition shadow-md">
+                          Return Book
+                        </button>
+                      </form>
+                    <% } %>
                   </td>
                 </tr>
               <% }); %>

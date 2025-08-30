@@ -1,8 +1,10 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
 
-const dashboardController=require('../controllers/dashboardController');
+const dashboardController = require('../controllers/dashboardController');
+const verifyToken = require('../middleware/auth');
 
-router.get('/dashboard',dashboardController.getDashboard);
+// Protect the dashboard route so req.user is populated from the JWT
+router.get('/dashboard', verifyToken, dashboardController.getDashboard);
 
-module.exports=router;
+module.exports = router;

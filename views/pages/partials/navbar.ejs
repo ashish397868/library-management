@@ -36,8 +36,10 @@
               <% if (user) { %>
               <a href="/dashboard" data-path="/dashboard" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Dashboard</a>
               <a href="/books" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Books</a>
-              <a href="/addbook" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Add Book</a>
-              <a href="/borrow/books" data-path="/borrow/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Borrow</a>
+              <% if (user.role === 'admin') { %>
+                <a href="/addbook" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Add Book</a>
+                <a href="/borrow/books" data-path="/borrow/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Borrow</a>
+              <% } %>
               <% } %>
             </div>
 
@@ -76,7 +78,10 @@
           <% if (user) { %>
           <a href="/dashboard" data-path="/dashboard" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Dashboard</a>
           <a href="/books" data-path="/books" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Books</a>
-          <a href="/addbook" data-path="/books" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Add Book</a>
+          <% if (user.role === 'admin') { %>
+            <a href="/addbook" data-path="/books" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Add Book</a>
+            <a href="/borrow/books" data-path="/borrow/books" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Borrow</a>
+          <% } %>
 
           <% } %> <% if (!user) { %>
           <a href="/login" class="block text-sm text-gray-300 py-2 hover:text-white hover:bg-gray-700">Login</a>
