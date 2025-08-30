@@ -31,37 +31,28 @@ module.exports.returnBookById = async (req, res) => {
       return res.render("pages/message", { message: "Only admin can return books.", user: req.session.userdata });
     }
     const bookId = req.params.id;
-    const userId = req.body.userId;
-    // cast to ObjectId when possible to avoid mismatch
-    let bookObjId = bookId;
-    let userObjId = userId;
-    try {
-      bookObjId = mongoose.Types.ObjectId(bookId);
-    } catch (e) {
-      // keep as-is
-    }
-    try {
-      userObjId = mongoose.Types.ObjectId(userId);
-    } catch (e) {
-      // keep as-is
+    // Expect borrowId from admin form (so we delete that specific borrow record)
+    const borrowId = req.body.borrowId;
+    if (!borrowId) {
+      return res.render("pages/message", { message: "No borrow selected for return.", user: req.session.userdata });
     }
 
-    // Find the borrow record for this user and book (active borrow: returnDate null or not set)
-    const borrowRecord = await Borrow.findOne({
-      bookId: bookObjId,
-      userId: userObjId,
-      $or: [ { returnDate: null }, { returnDate: { $exists: false } } ]
-    }).sort({ borrowDate: -1 });
+    // Find the borrow record
+    const borrowRecord = await Borrow.findById(borrowId);
     if (!borrowRecord) {
-      return res.render("pages/message", { message: "No active borrow record found for this user and book.", user: req.session.userdata });
+      return res.render("pages/message", { message: "Borrow record not found.", user: req.session.userdata });
     }
-    // Mark as returned
-    borrowRecord.returnDate = new Date();
-    await borrowRecord.save();
+
+    // Delete the borrow document (admin wants to remove the user's borrow)
+    await Borrow.findByIdAndDelete(borrowId);
+
     // Increase book quantity
     const book = await Book.findById(bookId);
-    book.quantity++;
-    await book.save();
+    if (book) {
+      book.quantity++;
+      await book.save();
+    }
+
     res.redirect("/books");
   } catch (error) {
     console.error(error);
