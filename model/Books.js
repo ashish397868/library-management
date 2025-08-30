@@ -15,10 +15,10 @@ const booksSchema = new Schema({
     type: Number,
     required: true
   },
-  authorId: {  // Correct field for population
-    type: Schema.Types.ObjectId,  // Must be ObjectId
-    ref: "Author",  // Reference to Author model
-    required: true
+  author: {
+    type: String,
+    required: true,
+    trim: true
   },
   quantity:{
     type: Number

@@ -1,49 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" class="bg-[#0d1117] text-white">
-<head>
-  <meta charset="UTF-8" />
-  <title>Library Management</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-</head>
-<body class="bg-gray-100">
-  <!-- Navbar -->
-  <nav class="bg-gray-900 text-white shadow">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex items-center">
-          <a href="/" class="flex items-center">
-            <img src="https://tailwindflex.com/images/logo.svg" class="h-8 w-auto" alt="Logo" />
-            <span class="ml-2 font-bold text-xl">Digital Library</span>
-          </a>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden">
-          <button id="mobile-menu-button" class="text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Nav Links + Profile/Auth Buttons -->
-        <div class="hidden md:flex items-center space-x-8">
-          <!-- Navigation Links -->
-          <div class="flex space-x-6">
-            <% if (user) { %>
-              <a href="/dashboard" data-path="/dashboard" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Dashboard</a>
-              <a href="/books" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Books</a>
-              <a href="/authors" data-path="/authors" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Authors</a>
-              <a href="/addauthor" data-path="/author" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Add Author</a>
-              <a href="/addbook" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Add Book</a>
-              <a href="/borrow/books" data-path="/borrow/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Borrow</a>
-            <% } %>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Library Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-gray-900 text-white shadow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="/" class="flex items-center">
+              <img src="https://tailwindflex.com/images/logo.svg" class="h-8 w-auto" alt="Logo" />
+              <span class="ml-2 font-bold text-xl">Digital Library</span>
+            </a>
           </div>
 
-          <% if (user) { %>
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Nav Links + Profile/Auth Buttons -->
+          <div class="hidden md:flex items-center space-x-8">
+            <!-- Navigation Links -->
+            <div class="flex space-x-6">
+              <% if (user) { %>
+              <a href="/dashboard" data-path="/dashboard" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Dashboard</a>
+              <a href="/books" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Books</a>
+              <a href="/addbook" data-path="/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Add Book</a>
+              <a href="/borrow/books" data-path="/borrow/books" class="nav-link text-sm font-medium text-gray-300 border-b-2 border-transparent hover:text-white hover:border-white">Borrow</a>
+              <% } %>
+            </div>
+
+            <% if (user) { %>
             <!-- Profile Dropdown -->
             <div class="relative">
               <button id="user-menu-button" class="flex items-center bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white">
@@ -59,67 +57,60 @@
                 <a href="/logout" class="block px-4 py-2 text-sm hover:bg-gray-100">Sign out</a>
               </div>
             </div>
-          <% } else { %>
+            <% } else { %>
             <!-- Login and Sign Up Buttons -->
             <div class="flex space-x-4">
               <a href="/login" class="inline-block">
-                <button class="px-4 py-2 border-2 border-cyan-400 rounded-md text-cyan-400 font-bold transition hover:bg-cyan-400 hover:text-[#0d1117]">
-                  Login
-                </button>
+                <button class="px-4 py-2 border-2 border-cyan-400 rounded-md text-cyan-400 font-bold transition hover:bg-cyan-400 hover:text-[#0d1117]">Login</button>
               </a>
               <a href="/signup" class="inline-block">
-                <button class="px-4 py-2 border-2 border-cyan-400 rounded-md text-cyan-400 font-bold transition hover:bg-cyan-400 hover:text-[#0d1117]">
-                  Sign Up
-                </button>
+                <button class="px-4 py-2 border-2 border-cyan-400 rounded-md text-cyan-400 font-bold transition hover:bg-cyan-400 hover:text-[#0d1117]">Sign Up</button>
               </a>
             </div>
-          <% } %>
+            <% } %>
+          </div>
         </div>
-      </div>
 
-      <!-- Mobile Dropdown Menu -->
-      <div id="mobile-menu" class="md:hidden hidden mt-2 pb-4 space-y-1 bg-gray-800 rounded-md px-4">
-        <% if (user) { %>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-2 pb-4 space-y-1 bg-gray-800 rounded-md px-4">
+          <% if (user) { %>
           <a href="/dashboard" data-path="/dashboard" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Dashboard</a>
           <a href="/books" data-path="/books" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Books</a>
-          <a href="/authors" data-path="/authors" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Authors</a>
-          <a href="/addauthor" data-path="/author" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Add Author</a>
           <a href="/addbook" data-path="/books" class="nav-link block text-sm text-gray-300 py-2 rounded-md hover:text-white hover:bg-gray-700">Add Book</a>
 
-        <% } %>
-        <% if (!user) { %>
+          <% } %> <% if (!user) { %>
           <a href="/login" class="block text-sm text-gray-300 py-2 hover:text-white hover:bg-gray-700">Login</a>
           <a href="/signup" class="block text-sm text-gray-300 py-2 hover:text-white hover:bg-gray-700">Sign Up</a>
-        <% } else { %>
-          <hr class="border-gray-700">
+          <% } else { %>
+          <hr class="border-gray-700" />
           <a href="/profile" class="block text-sm text-gray-300 py-2 hover:text-white hover:bg-gray-700">Your Profile</a>
           <a href="/settings" class="block text-sm text-gray-300 py-2 hover:text-white hover:bg-gray-700">Settings</a>
           <a href="/logout" class="block text-sm text-gray-300 py-2 hover:text-white hover:bg-gray-700">Sign Out</a>
-        <% } %>
+          <% } %>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Scripts -->
-  <script>
-    // Toggle mobile menu
-    document.getElementById("mobile-menu-button")?.addEventListener("click", () => {
-      document.getElementById("mobile-menu")?.classList.toggle("hidden");
-    });
+    <!-- Scripts -->
+    <script>
+      // Toggle mobile menu
+      document.getElementById("mobile-menu-button")?.addEventListener("click", () => {
+        document.getElementById("mobile-menu")?.classList.toggle("hidden");
+      });
 
-    // Toggle user dropdown
-    document.getElementById("user-menu-button")?.addEventListener("click", () => {
-      document.getElementById("user-menu")?.classList.toggle("hidden");
-    });
+      // Toggle user dropdown
+      document.getElementById("user-menu-button")?.addEventListener("click", () => {
+        document.getElementById("user-menu")?.classList.toggle("hidden");
+      });
 
-    // Highlight active nav link
-    const currentPath = window.location.pathname;
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.dataset.path === currentPath) {
-        link.classList.add('border-cyan-400', 'text-white');
-        link.classList.remove('border-transparent', 'text-gray-300');
-      }
-    });
-  </script>
-</body>
+      // Highlight active nav link
+      const currentPath = window.location.pathname;
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        if (link.getAttribute("href") === currentPath) {
+          link.classList.add("border-cyan-400", "text-white");
+          link.classList.remove("border-transparent", "text-gray-300");
+        }
+      });
+    </script>
+  </body>
 </html>

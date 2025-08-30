@@ -8,8 +8,12 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
-    minlength:8
+    required: true
+  },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user"
   }
 },{timestamps:true});
 

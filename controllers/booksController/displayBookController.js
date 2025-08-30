@@ -7,6 +7,7 @@ module.exports.getDisplayBook = (req, res) => {
 module.exports.displayAllBooks = async (req, res) => {
   try {
     const books = await Book.find(); 
+    console.log("Books ", books);
     res.render("pages/books", { books });
   } catch (error) {
     console.error(error);
@@ -32,7 +33,7 @@ module.exports.displayBookById = async (req, res) => {
 
 module.exports.displayBookTable = async (req, res) => {
   try {
-    const books = await Book.find().populate("authorId", "name nationality bio");
+    const books = await Book.find();
     res.render("pages/booktable", { books });
   } catch (error) {
     console.error(error);

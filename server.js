@@ -9,7 +9,6 @@ const app = express();
 const port = process.env.PORT;
 
 // Import routes
-const authorRouter = require('./routes/authorRouter');
 const bookRouter = require('./routes/booksRouter');
 const loginSignupRouter = require('./routes/loginSignup');
 const dashboardRouter = require('./routes/dashboardController');
@@ -39,7 +38,6 @@ app.set('view engine', 'ejs');
 
 // Routes
 app.use('/', loginSignupRouter);
-app.use('/', authorRouter);
 app.use('/', bookRouter);
 app.use('/', dashboardRouter);
 app.use('/borrow', borrowRouter);

@@ -14,7 +14,6 @@
         action="/signup"
         method="POST"
         class="bg-white/10 backdrop-blur-md border border-cyan-400/30 w-full max-w-md p-6 rounded-xl shadow-lg flex flex-col gap-4 transition-all duration-300 hover:shadow-cyan-400/50"
-        onsubmit="return validateForm()"
       >
         <h2 class="text-2xl font-bold text-cyan-400 text-center mb-2">Sign Up</h2>
 
@@ -36,19 +35,8 @@
             id="password"
             name="password"
             required
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             class="px-3 py-2 bg-[#161b22] text-white rounded-md border-2 border-transparent focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(0,255,255,0.8)] transition"
           />
-          <div class="text-sm text-gray-400 mt-1">
-            Password must:
-            <ul class="list-disc list-inside">
-              <li>Be at least 8 characters long</li>
-              <li>Contain at least one uppercase letter</li>
-              <li>Contain at least one lowercase letter</li>
-              <li>Contain at least one number</li>
-              <li>Contain at least one special character (@$!%*?&)</li>
-            </ul>
-          </div>
           <div id="password-error" class="text-red-400 text-sm mt-1 hidden"></div>
         </div>
 
@@ -72,28 +60,5 @@
     </main>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      function validateForm() {
-        const password = document.getElementById('password').value;
-        const passwordError = document.getElementById('password-error');
-        
-        const requirements = {
-          length: password.length >= 8,
-          uppercase: /[A-Z]/.test(password),
-          lowercase: /[a-z]/.test(password),
-          number: /\d/.test(password),
-          special: /[@$!%*?&]/.test(password)
-        };
-
-        if (!Object.values(requirements).every(Boolean)) {
-          passwordError.textContent = 'Password does not meet all requirements';
-          passwordError.classList.remove('hidden');
-          return false;
-        }
-
-        passwordError.classList.add('hidden');
-        return true;
-      }
-    </script>
   </body>
 </html>
