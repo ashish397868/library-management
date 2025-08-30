@@ -34,13 +34,17 @@
           </div>
         </div>
 
-        <!-- User Select Dropdown -->
+        <!-- Borrow Records Select Dropdown (show only users who actually borrowed this book) -->
         <div>
-          <label for="userId" class="block mb-2 text-sm font-semibold">Select User</label>
-          <select name="userId" id="userId" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" required>
-            <% users.forEach(function(user) { %>
-              <option value="<%= user._id %>"><%= user.userid %></option>
-            <% }); %>
+          <label for="borrowId" class="block mb-2 text-sm font-semibold">Select Borrower to Return</label>
+          <select name="borrowId" id="borrowId" class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white" required>
+            <% if (!borrows || borrows.length === 0) { %>
+              <option disabled selected>No active borrows for this book</option>
+            <% } else { %>
+              <% borrows.forEach(function(b) { %>
+                <option value="<%= b._id %>"><%= (b.userId?.userid || 'Unknown') + ' — borrowed on ' + (new Date(b.borrowDate)).toLocaleDateString() %></option>
+              <% }) %>
+            <% } %>
           </select>
         </div>
 

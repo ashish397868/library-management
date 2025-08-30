@@ -17,7 +17,7 @@ module.exports.getReturnBookPage = async (req, res) => {
     const borrows = await Borrow.find({ bookId: book._id, returnDate: null }).populate('userId');
     // Get users who have borrowed this book
     const users = borrows.map(b => b.userId);
-    res.render("pages/returnbook", { book, users, borrows });
+  res.render("pages/returnbook", { book, users, borrows, user: req.session.userdata });
   } catch (error) {
     console.error(error);
     res.render("pages/message", { message: "Error loading return book page.", user: req.session.userdata });
@@ -28,7 +28,7 @@ module.exports.getReturnBookPage = async (req, res) => {
 module.exports.returnBookById = async (req, res) => {
   try {
     if (!req.user || req.user.role !== "admin") {
-      return res.render("pages/message", { message: "Only admin can return books.", user: req.session.userdata });
+  return res.render("pages/message", { message: "Only admin can return books.", user: req.session.userdata });
     }
     const bookId = req.params.id;
     // Expect borrowId from admin form (so we delete that specific borrow record)

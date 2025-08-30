@@ -55,12 +55,12 @@
                           Delete
                         </button>
                       </form>
-                      <!-- Return Book Button -->
-                      <form action="/books/<%= book._id %>/return" method="POST">
-                        <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-green-600 rounded-md hover:bg-green-500 transition shadow-md">
+                      <!-- Return Book Button: go to return page where admin selects borrower -->
+                      <a href="/books/<%= book._id %>/return">
+                        <button type="button" class="px-4 py-2 text-sm font-bold text-white bg-green-600 rounded-md hover:bg-green-500 transition shadow-md">
                           Return Book
                         </button>
-                      </form>
+                      </a>
                     <% } %>
                   </td>
                 </tr>
